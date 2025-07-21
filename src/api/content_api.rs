@@ -3,7 +3,7 @@ use crate::api::proto::content::{
     CollectionAllRequest, CollectionAllResponse, ContentPaginateRequest, ContentPaginateResponse, DeleteContentRequest, DeleteContentResponse, GetCollectionRequest, GetCollectionResponse, GetContentRequest, GetContentResponse, PutContentIdentifierRequest, PutContentIdentifierResponse, StoreCollectionRequest, StoreCollectionResponse, StoreContentRequest, StoreContentResponse, UpdateCollectionRequest, UpdateCollectionResponse, UpdateContentRequest, UpdateContentResponse
 };
 use crate::avored_state::AvoRedState;
-use crate::error::Error::TonicError;
+use crate::error::Error::Tonic;
 use crate::extensions::tonic_request::TonicRequest;
 use crate::models::admin_user_model::AdminUserModelExtension;
 use std::sync::Arc;
@@ -42,7 +42,7 @@ impl Content for ContentApi {
                 Ok(res)
             }
             Err(e) => match e {
-                TonicError(status) => Err(status),
+                Tonic(status) => Err(*status),
                 _ => Err(Status::internal(e.to_string())),
             },
         }
@@ -76,7 +76,7 @@ impl Content for ContentApi {
                 Ok(res)
             }
             Err(e) => match e {
-                TonicError(status) => Err(status),
+                Tonic(status) => Err(*status),
                 _ => Err(Status::internal(e.to_string())),
             },
         }
@@ -112,7 +112,7 @@ impl Content for ContentApi {
                 Ok(res)
             }
             Err(e) => match e {
-                TonicError(status) => Err(status),
+                Tonic(status) => Err(*status),
                 _ => Err(Status::internal(e.to_string())),
             },
         }
@@ -146,7 +146,7 @@ impl Content for ContentApi {
                 Ok(res)
             }
             Err(e) => match e {
-                TonicError(status) => Err(status),
+                Tonic(status) => Err(*status),
                 _ => Err(Status::internal(e.to_string())),
             },
         }
@@ -182,7 +182,7 @@ impl Content for ContentApi {
                 Ok(res)
             }
             Err(e) => match e {
-                TonicError(status) => Err(status),
+                Tonic(status) => Err(*status),
                 _ => Err(Status::internal(e.to_string())),
             },
         }
@@ -221,7 +221,7 @@ impl Content for ContentApi {
                 Ok(res)
             }
             Err(e) => match e {
-                TonicError(status) => Err(status),
+                Tonic(status) => Err(*status),
                 _ => Err(Status::internal(e.to_string())),
             },
         }
@@ -255,7 +255,7 @@ impl Content for ContentApi {
                 Ok(res)
             }
             Err(e) => match e {
-                TonicError(status) => Err(status),
+                Tonic(status) => Err(*status),
                 _ => Err(Status::internal(e.to_string())),
             },
         }
@@ -290,7 +290,7 @@ impl Content for ContentApi {
                 Ok(res)
             }
             Err(e) => match e {
-                TonicError(status) => Err(status),
+                Tonic(status) => Err(*status),
                 _ => Err(Status::internal(e.to_string())),
             },
         }
@@ -326,7 +326,7 @@ impl Content for ContentApi {
                 Ok(res)
             }
             Err(e) => match e {
-                TonicError(status) => Err(status),
+                Tonic(status) => Err(*status),
                 _ => Err(Status::internal(e.to_string())),
             },
         }
@@ -362,7 +362,7 @@ impl Content for ContentApi {
                 Ok(res)
             }
             Err(e) => match e {
-                TonicError(status) => Err(status),
+                Tonic(status) => Err(*status),
                 _ => Err(Status::internal(e.to_string())),
             },
         }

@@ -2,7 +2,7 @@ use argon2::{Argon2, PasswordHash, PasswordVerifier};
 use crate::error::{Error, Result};
 use crate::models::password_rest_model::{CreatablePasswordResetModel, ForgotPasswordViewModel};
 use crate::models::validation_error::{ErrorMessage, ErrorResponse};
-use crate::Error::TonicError;
+use crate::Error::Tonic;
 use crate::providers::avored_database_provider::DB;
 use crate::providers::avored_template_provider::AvoRedTemplateProvider;
 use crate::repositories::admin_user_repository::AdminUserRepository;
@@ -73,8 +73,8 @@ impl AuthService {
         let email_message = Message::builder()
             .build_email_message(
                 &from_address, 
-                &to_address, 
-                &email_subject, 
+                to_address,
+                email_subject,
                 forgot_password_email_content
             )?;
         
@@ -118,7 +118,7 @@ impl AuthService {
             };
             let error_string = serde_json::to_string(&error_response)?;
 
-            return Err(TonicError(Status::invalid_argument(error_string)));
+            return Err(Tonic(Box::new(Status::invalid_argument(error_string))));
         }
 
         let claims: TokenClaims = admin_user_model.clone().try_into()?;
