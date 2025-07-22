@@ -3,7 +3,7 @@ use tonic::{async_trait, Request, Response, Status};
 use crate::api::proto::asset::asset_server::Asset;
 use crate::api::proto::asset::{AssetPaginateRequest, AssetPaginateResponse, CreateFolderRequest, CreateFolderResponse, DeleteAssetRequest, DeleteAssetResponse, DeleteFolderRequest, DeleteFolderResponse, RenameAssetRequest, RenameAssetResponse};
 use crate::avored_state::AvoRedState;
-use crate::error::Error::TonicError;
+use crate::error::Error::Tonic;
 use crate::extensions::tonic_request::TonicRequest;
 use crate::models::admin_user_model::AdminUserModelExtension;
 
@@ -44,7 +44,7 @@ impl Asset for AssetApi {
                 Ok(res)
             },
             Err(e) => match e {
-                TonicError(status) => Err(status),
+                Tonic(boxed_status) => Err(*boxed_status),
                 _ => Err(Status::internal(e.to_string()))
             }
         }
@@ -82,7 +82,7 @@ impl Asset for AssetApi {
                 Ok(res)
             },
             Err(e) => match e {
-                TonicError(status) => Err(status),
+                Tonic(boxed_status) => Err(*boxed_status),
                 _ => Err(Status::internal(e.to_string()))
             }
         }
@@ -118,7 +118,7 @@ impl Asset for AssetApi {
                 Ok(res)
             },
             Err(e) => match e {
-                TonicError(status) => Err(status),
+                Tonic(boxed_status) => Err(*boxed_status),
                 _ => Err(Status::internal(e.to_string()))
             }
         }
@@ -154,7 +154,7 @@ impl Asset for AssetApi {
                 Ok(res)
             },
             Err(e) => match e {
-                TonicError(status) => Err(status),
+                Tonic(boxed_status) => Err(*boxed_status),
                 _ => Err(Status::internal(e.to_string()))
             }
         }
@@ -192,7 +192,7 @@ impl Asset for AssetApi {
                 Ok(res)
             },
             Err(e) => match e {
-                TonicError(status) => Err(status),
+                Tonic(boxed_status) => Err(*boxed_status),
                 _ => Err(Status::internal(e.to_string()))
             }
         }

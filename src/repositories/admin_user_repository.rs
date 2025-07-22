@@ -10,7 +10,7 @@ use surrealdb::dbs::Session;
 use surrealdb::kvs::Datastore;
 use surrealdb::sql::{Datetime, Value};
 use tonic::Status;
-use crate::error::Error::TonicError;
+use crate::error::Error::Tonic;
 use crate::models::validation_error::{ErrorMessage, ErrorResponse};
 use super::into_iter_objects;
 
@@ -56,7 +56,7 @@ impl AdminUserRepository {
                     errors,
                 };
                 let error_string = serde_json::to_string(&error_response)?;
-                return Err(TonicError(Status::invalid_argument(error_string)));
+                return Err(Tonic(Box::new(Status::invalid_argument(error_string))));
             },
         };
         let admin_user_model: Result<AdminUserModel> = result_object?.try_into();
@@ -272,11 +272,10 @@ impl AdminUserRepository {
             "\
             SELECT *, ->admin_user_role->roles.* as roles \
             FROM admin_users \
-            ORDER {} {} \
+            ORDER {order_column} {order_type} \
             LIMIT $limit \
             START $start;\
-        ",
-            order_column, order_type
+        "
         );
         let vars = BTreeMap::from([
             ("limit".into(), PER_PAGE.into()),

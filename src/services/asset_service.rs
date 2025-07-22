@@ -183,7 +183,7 @@ impl AssetService {
             return Ok(res);
         }
 
-        Err(Error::TonicError(Status::internal("Unable to delete asset")))
+        Err(Error::Tonic(Box::new(Status::internal("Unable to delete asset"))))
     }
 
     pub async fn delete_folder(
@@ -210,7 +210,7 @@ impl AssetService {
             return Ok(res);
         }
 
-        Err(Error::TonicError(Status::internal("Unable to delete folder")))
+        Err(Error::Tonic(Box::new(Status::internal("Unable to delete folder"))))
     }
 
 
@@ -228,7 +228,7 @@ impl AssetService {
         let new_asset_path = format!("/public/upload/{}", &request.name);
 
         if fs::try_exists(&old_asset_path).await? {
-            fs::rename(&old_asset_path, &format!(".{}", new_asset_path)).await?;
+            fs::rename(&old_asset_path, &format!(".{new_asset_path}")).await?;
             let updated_asset_model = self.asset_repository
                 .update_asset_path(
                     datastore,
@@ -248,6 +248,6 @@ impl AssetService {
             return Ok(response);
         }
 
-        Err(Error::TonicError(Status::internal("Unable to rename asset")))
+        Err(Error::Tonic(Box::new(Status::internal("Unable to rename asset"))))
     }
 }

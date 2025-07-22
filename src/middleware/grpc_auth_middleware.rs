@@ -4,6 +4,7 @@ use tonic::{Request, Status};
 use crate::error::Error;
 use crate::models::token_claim_model::TokenClaims;
 
+#[allow(clippy::result_large_err)]
 pub fn check_auth(mut req: Request<()>) -> Result<Request<()>, Status> {
 
     match req.metadata().get("authorization") {

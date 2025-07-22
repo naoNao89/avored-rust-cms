@@ -156,7 +156,7 @@ async fn main() -> Result<(), Error>{
 
     let port = env::var("PORT").unwrap_or("50051".to_string());
 
-    let listener = tokio::net::TcpListener::bind(format!("127.0.0.1:{}", port))
+    let listener = tokio::net::TcpListener::bind(format!("127.0.0.1:{port}"))
         .await
         .unwrap();
 
@@ -169,7 +169,7 @@ async fn main() -> Result<(), Error>{
     println!();
     println!();
 
-    println!("Server started: http://0.0.0.0:{}", port);
+    println!("Server started: http://0.0.0.0:{port}");
 
     axum::serve(listener ,service.into_make_service())
         .await
@@ -187,7 +187,7 @@ fn init_log() {
     let file = File::create(Path::new("public").join("log").join("avored.log"));
     let file = match file {
         Ok(file) => file,
-        Err(error) => panic!("Error: {:?}", error),
+        Err(error) => panic!("Error: {error:?}"),
     };
     let debug_log = tracing_subscriber::fmt::layer().with_writer(Arc::new(file));
 
