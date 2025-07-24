@@ -1,13 +1,20 @@
 use std::sync::Arc;
 
-use crate::api::handlers::asset::request::store_asset_request::StoreAssetRequest;
-use crate::models::asset_model::{AssetModel, CreatableAssetModel, MetaDataType};
-use crate::models::token_claim_model::LoggedInUser;
-use crate::{avored_state::AvoRedState, error::Result};
-use axum::extract::{Multipart, Query};
-use axum::{extract::State, response::IntoResponse, Extension, Json};
-use rand::distr::Alphanumeric;
-use rand::Rng;
+use crate::{
+    api::handlers::asset::request::store_asset_request::StoreAssetRequest,
+    avored_state::AvoRedState,
+    error::Result,
+    models::{
+        asset_model::{AssetModel, CreatableAssetModel, MetaDataType},
+        token_claim_model::LoggedInUser,
+    },
+};
+use axum::{
+    extract::{Multipart, Query, State},
+    response::IntoResponse,
+    Extension, Json,
+};
+use rand::{distr::Alphanumeric, Rng};
 use serde::Serialize;
 
 const ALLOW_TYPES: [&str; 3] = ["image/jpeg", "image/jpg", "image/png"];

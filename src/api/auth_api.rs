@@ -1,10 +1,12 @@
-use crate::api::proto::auth::auth_server::Auth;
-use crate::api::proto::auth::{
-    ForgotPasswordRequest, ForgotPasswordResponse, LoginRequest, LoginResponse,
-    ResetPasswordRequest, ResetPasswordResponse,
+use crate::{
+    api::proto::auth::{
+        auth_server::Auth,
+        ForgotPasswordRequest, ForgotPasswordResponse, LoginRequest, LoginResponse,
+        ResetPasswordRequest, ResetPasswordResponse,
+    },
+    avored_state::AvoRedState,
+    error::Error::TonicError,
 };
-use crate::avored_state::AvoRedState;
-use crate::error::Error::TonicError;
 use std::sync::Arc;
 use tonic::{async_trait, Request, Response, Status};
 

@@ -1,17 +1,20 @@
 use super::into_iter_objects;
-use crate::error::Error::TonicError;
-use crate::error::{Error, Result};
-use crate::models::admin_user_model::{
-    AdminUserModel, CreatableAdminUserModel, UpdatableAdminUserModel,
+use crate::{
+    error::{Error, Error::TonicError, Result},
+    models::{
+        admin_user_model::{AdminUserModel, CreatableAdminUserModel, UpdatableAdminUserModel},
+        validation_error::{ErrorMessage, ErrorResponse},
+        ModelCount,
+    },
+    PER_PAGE,
 };
-use crate::models::validation_error::{ErrorMessage, ErrorResponse};
-use crate::models::ModelCount;
-use crate::PER_PAGE;
 use rust_i18n::t;
 use std::collections::BTreeMap;
-use surrealdb::dbs::Session;
-use surrealdb::kvs::Datastore;
-use surrealdb::sql::{Datetime, Value};
+use surrealdb::{
+    dbs::Session,
+    kvs::Datastore,
+    sql::{Datetime, Value},
+};
 use tonic::Status;
 
 const ADMIN_USER_TABLE: &str = "admin_users";

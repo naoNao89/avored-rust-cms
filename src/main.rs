@@ -1,41 +1,53 @@
-use crate::api::admin_user_api::AdminUserApi;
-use crate::api::asset_api::AssetApi;
-use crate::api::auth_api::AuthApi;
-use crate::api::cms_api::CmsApi;
-use crate::api::content_api::ContentApi;
-use crate::api::dashboard_api::DashboardApi;
-use crate::api::general_api::GeneralApi;
-use crate::api::handlers::asset::store_asset_api_handler::store_asset_api_handler;
-use crate::api::misc_api::MiscApi;
-use crate::api::proto::admin_user::admin_user_server::AdminUserServer;
-use crate::api::proto::asset::asset_server::AssetServer;
-use crate::api::proto::auth::auth_server::AuthServer;
-use crate::api::proto::cms::cms_server::CmsServer;
-use crate::api::proto::content::content_server::ContentServer;
-use crate::api::proto::dashboard::dashboard_server::DashboardServer;
-use crate::api::proto::general::general_service_server::GeneralServiceServer;
-use crate::api::proto::misc::misc_server::MiscServer;
-use crate::api::proto::setting::setting_server::SettingServer;
-use crate::api::setting_api::SettingApi;
-use crate::avored_state::AvoRedState;
-use crate::error::Error;
-use crate::middleware::grpc_auth_middleware::check_auth;
-use crate::middleware::require_jwt_authentication::require_jwt_authentication;
-use crate::middleware::security_headers::add_security_headers;
-use axum::http::HeaderValue;
-use axum::response::Html;
-use axum::routing::{get, post};
-use axum::Router;
+// API imports grouped by module
+use crate::api::{
+    admin_user_api::AdminUserApi,
+    asset_api::AssetApi,
+    auth_api::AuthApi,
+    cms_api::CmsApi,
+    content_api::ContentApi,
+    dashboard_api::DashboardApi,
+    general_api::GeneralApi,
+    handlers::asset::store_asset_api_handler::store_asset_api_handler,
+    misc_api::MiscApi,
+    setting_api::SettingApi,
+};
+
+// Proto server imports grouped by module
+use crate::api::proto::{
+    admin_user::admin_user_server::AdminUserServer,
+    asset::asset_server::AssetServer,
+    auth::auth_server::AuthServer,
+    cms::cms_server::CmsServer,
+    content::content_server::ContentServer,
+    dashboard::dashboard_server::DashboardServer,
+    general::general_service_server::GeneralServiceServer,
+    misc::misc_server::MiscServer,
+    setting::setting_server::SettingServer,
+};
+// Core application imports
+use crate::{
+    avored_state::AvoRedState,
+    error::Error,
+    middleware::{
+        grpc_auth_middleware::check_auth,
+        require_jwt_authentication::require_jwt_authentication,
+        security_headers::add_security_headers,
+    },
+};
+// External crate imports grouped by functionality
+use axum::{
+    http::HeaderValue,
+    response::Html,
+    routing::{get, post},
+    Router,
+};
 use axum_tonic::{NestTonic, RestGrpcService};
-use std::env;
-use std::fs::File;
-use std::path::Path;
-use std::sync::Arc;
-use tower_http::cors::{Any, CorsLayer};
-use tower_http::services::ServeDir;
-use tracing_subscriber::layer::SubscriberExt;
-use tracing_subscriber::util::SubscriberInitExt;
-use tracing_subscriber::{filter, Layer};
+use std::{env, fs::File, path::Path, sync::Arc};
+use tower_http::{
+    cors::{Any, CorsLayer},
+    services::ServeDir,
+};
+use tracing_subscriber::{filter, layer::SubscriberExt, util::SubscriberInitExt, Layer};
 
 mod api;
 mod avored_state;
