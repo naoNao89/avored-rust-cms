@@ -1,19 +1,117 @@
-/node_modules
+# Rust build artifacts
+target/
+Cargo.lock
+
+# Node.js dependencies and artifacts
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Frontend build outputs
+dist/
+build/
+.next/
+.nuxt/
+.vuepress/dist/
+.serverless/
+.parcel-cache/
+
+# Environment files (keep EXAMPLE.env)
+.env
+.env.*
+!EXAMPLE.env
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+data/*.db
+
+# Log files
+*.log
+logs/
+log/
+/public/log/
+
+# Upload directories
+/public/upload/
+/public/install_demo/
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# OS generated files
 .DS_Store
-.env.dev
-.env.test
-.env.stag
-.env.prod
-.idea
-.vscode
-.devcontainer
-/target/debug
-/target/rust-analyzer
-/target/release
-/target/tmp
-/target/.rustc_info.json
-/target/CACHEDIR.TAG
-/public/upload
-/public/log
-/public/install_demo
-ts-grpc-react-admin/node_modules
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+.temp/
+
+# Coverage reports
+coverage/
+*.lcov
+.nyc_output/
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# yarn v2
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
