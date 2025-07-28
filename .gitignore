@@ -7,11 +7,8 @@
 .idea
 .vscode
 .devcontainer
-/target/debug
-/target/release
-/target/tmp
-/target/.rustc_info.json
-/target/CACHEDIR.TAG
+/target/
+security_tests/target/
 /public/upload
 /public/log
 /public/install_demo
